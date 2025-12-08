@@ -27,9 +27,9 @@ const HomePage = () => {
   const fetchTasks = async () => {
     try {
       const res= await api.get(`/tasks?filter=${dateQuery}`);
-      setTaskBuffer(res.data.tasks);
-      setActiveTasksCount(res.data.activeCount);
-      setCompletedTasksCount(res.data.completedCount);
+      setTaskBuffer(res.data.tasks || []);
+      setActiveTasksCount(res.data.activeCount || 0);
+      setCompletedTasksCount(res.data.completedCount || 0);
     }catch (error) {
       console.error('Error fetching tasks:', error);
       toast.error('Failed to fetch tasks. Please try again later.');
@@ -54,7 +54,7 @@ const HomePage = () => {
     setPage(newPage);
   }
   //variable
-  const filteredTasks = taskBuffer.filter((task) => {
+  const filteredTasks = (taskBuffer || []).filter((task) => {
     switch (filter) {
       case 'active':
         return task.status.trim() === 'active';
