@@ -8,10 +8,10 @@ const taskSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["active", "completed"],
+    enum: ["active", "complete"],
     default: "active",
   },
-conpletedAt: {  
+completedAt: {  
     type: Date, 
     default: null,
     },  
